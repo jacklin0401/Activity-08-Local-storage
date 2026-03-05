@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../models/folder.dart';
 import '../repositories/folder_repository.dart';
 import '../repositories/card_repository.dart';
@@ -93,7 +92,7 @@ class _FoldersScreenState extends State<FoldersScreen> {
           crossAxisCount: 2,
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
-          childAspectRatio: 0.9,
+          childAspectRatio: 0.8,
         ),
         itemCount: _folders.length,
         itemBuilder: (context, index) {
@@ -120,10 +119,12 @@ class _FoldersScreenState extends State<FoldersScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    _getSuitIcon(folder.folderName),
-                    size: 64,
-                    color: _getSuitColor(folder.folderName),
+                  Text(
+                    _getSuitSymbol(folder.folderName),
+                    style: TextStyle(
+                      fontSize: 64,
+                      color: _getSuitColor(folder.folderName),
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -151,18 +152,13 @@ class _FoldersScreenState extends State<FoldersScreen> {
     );
   }
 
-  IconData _getSuitIcon(String suitName) {
+  String _getSuitSymbol(String suitName) {
     switch (suitName) {
-      case 'Hearts':
-        return Icons.favorite;
-      case 'Diamonds':
-        return Icons.change_history;
-      case 'Clubs':
-        return Icons.filter_vintage;
-      case 'Spades':
-        return Icons.eco;
-      default:
-        return Icons.help;
+      case 'Hearts':   return '♥';
+      case 'Diamonds': return '♦';
+      case 'Clubs':    return '♣';
+      case 'Spades':   return '♠';
+      default:         return '?';
     }
   }
 
