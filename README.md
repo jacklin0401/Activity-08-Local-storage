@@ -1,16 +1,40 @@
-# activity_08_local_storage
+Card Organizer App
 
-A new Flutter project.
+The Card Organizer App is a Flutter mobile application that allows users to organize playing cards into suit folders (Hearts, Diamonds, Clubs, and Spades).
 
-## Getting Started
+The app stores data locally using SQLite and demonstrates CRUD operations (Create, Read, Update, Delete).
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Organize cards into folders by suit
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Display card images
+
+Add new cards
+
+Edit existing cards
+
+Delete cards
+
+Delete folders with cascade deletion
+
+Local data persistence using SQLite
+
+
+
+Technologies Used
+
+Flutter
+
+Dart
+
+SQLite 
+
+Contributors 
+Caira Major
+Jack Lin
+
+
+
+
