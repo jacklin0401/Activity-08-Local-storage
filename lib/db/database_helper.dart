@@ -73,7 +73,7 @@ class DatabaseHelper {
 
   Future _prepopulateCards(Database db) async {
 
-    final values = ['A','2','3','4','5','6','7','8','9','0','J','Q','K'];
+    final values = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 
     final suits = [
       {'name':'Hearts','code':'H'},
@@ -88,7 +88,8 @@ class DatabaseHelper {
 
       for (var value in values) {
 
-        final imagePath = 'assets/cards/$value${suits[i]['code']}.png';
+        
+        final imagePath = 'assets/cards/${value}${suits[i]['code']}.png';
 
         await db.insert('cards', {
           'card_name': value,
