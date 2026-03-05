@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
 import '../models/folder.dart';
 import '../repositories/card_repository.dart';
-import '../models/playing_card.dart'; 
-import '../helpers/image_helper.dart'; 
+import '../models/playing_card.dart';
+import '../helpers/image_helper.dart';
+import 'add_edit_card_screen.dart';
+
 class CardsScreen extends StatefulWidget {
   final Folder folder;
   const CardsScreen({super.key, required this.folder});
@@ -14,7 +15,6 @@ class CardsScreen extends StatefulWidget {
 
 class _CardsScreenState extends State<CardsScreen> {
   final CardRepository _cardRepository = CardRepository();
-
   List<PlayingCard> _cards = [];
   bool _loading = true;
 
@@ -27,10 +27,8 @@ class _CardsScreenState extends State<CardsScreen> {
   Future<void> _loadCards() async {
     final folderId = widget.folder.id;
     if (folderId == null) return;
-
     setState(() => _loading = true);
     final cards = await _cardRepository.getCardsByFolderId(folderId);
-
     if (!mounted) return;
     setState(() {
       _cards = cards;
@@ -82,34 +80,64 @@ class _CardsScreenState extends State<CardsScreen> {
                   itemCount: _cards.length,
                   itemBuilder: (context, index) {
                     final card = _cards[index];
-
                     return ListTile(
                       leading: Container(
-                      width: 55,
+                        width: 55,
                         height: 55,
                         padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.grey.shade300),
-                      ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.grey.shade300),
+                        ),
                         child: Image.asset(
-                        card.imageUrl!,
-                        fit: BoxFit.contain,
+                          card.imageUrl!,
+                          fit: BoxFit.contain,
                         ),
-                        ),
-                      
-  
-                        
+                      ),
                       title: Text(card.cardName),
                       subtitle: Text(card.suit),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
-                        onPressed: () => _deleteCard(card),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit, color: Colors.blue),
+                            onPressed: () async {
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddEditCardScreen(
+                                    card: card,
+                                    folderId: widget.folder.id!,
+                                  ),
+                                ),
+                              );
+                              await _loadCards();
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            onPressed: () => _deleteCard(card),
+                          ),
+                        ],
                       ),
                     );
                   },
                 ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddEditCardScreen(
+                folderId: widget.folder.id!,
+              ),
+            ),
+          );
+          await _loadCards();
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
