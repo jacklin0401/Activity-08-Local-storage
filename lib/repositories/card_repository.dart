@@ -30,7 +30,7 @@ class CardRepository {
       'cards',
       where: 'folder_id = ?',
       whereArgs: [folderId],
-      orderBy: 'card_name ASC',
+      orderBy: 'id ASC',
     );
 
     return List.generate(maps.length, (i) {
