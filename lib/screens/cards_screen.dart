@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/folder.dart';
 import '../repositories/card_repository.dart';
-import '../models/card.dart'; 
+import '../models/playing_card.dart'; 
 import '../helpers/image_helper.dart'; 
 class CardsScreen extends StatefulWidget {
   final Folder folder;
