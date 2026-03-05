@@ -84,14 +84,23 @@ class _CardsScreenState extends State<CardsScreen> {
                     final card = _cards[index];
 
                     return ListTile(
-                      leading: SizedBox(
-                        width: 55,
+                      leading: Container(
+                      width: 55,
                         height: 55,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: ImageHelper.buildCardImage(card.imageUrl),
-                        ),
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.grey.shade300),
                       ),
+                        child: Image.asset(
+                        card.imageUrl!,
+                        fit: BoxFit.contain,
+                        ),
+                        ),
+                      
+  
+                        
                       title: Text(card.cardName),
                       subtitle: Text(card.suit),
                       trailing: IconButton(
